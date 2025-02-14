@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Pokémon Card Shop</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>🌟 My Pokémon Card Shop 🌟</h1>
+        <nav>
+            <button onclick="showSection('ready-made-decks')">Ready-Made Decks</button>
+            <button onclick="showSection('custom-deck')">Build Custom Deck</button>
+        </nav>
+    </header>
+
+    <main>
+        <section id="ready-made-decks" class="active">
+            <h2>My Ready-Made Decks</h2>
+            <div class="deck-container">
+                <!-- Decks will be dynamically loaded here -->
+            </div>
+        </section>
+
+        <section id="custom-deck" class="hidden">
+            <h2>Build Your Own Deck</h2>
+            <div class="special-cards">
+                <!-- Cards will be dynamically loaded here -->
+            </div>
+        </section>
+    </main>
+
+    <div id="contact-button" class="floating-contact">
+        <a href="tel://+15555555555" class="contact-link">📞 Contact Me +506 54M4 5t45</a>
+    </div>
+
+    <footer>
+        <p>Made with ❤️ by a young Pokémon Trainer S4mSt4</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html> 
