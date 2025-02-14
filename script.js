@@ -181,4 +181,12 @@ style.textContent = `
         to { opacity: 1; transform: translateY(0); }
     }
 `;
-document.head.appendChild(style); 
+document.head.appendChild(style);
+
+function openGoogleMaps() {
+    // Uvita, Costa Rica coordinates
+    const uvitaCoordinates = '9.1589,-83.7534';
+    const zoomLevel = '13';
+    const googleMapsUrl = `https://www.google.com/maps/@${uvitaCoordinates},${zoomLevel}z`;
+    window.open(googleMapsUrl, '_blank');
+} 
