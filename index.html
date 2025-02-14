@@ -24,6 +24,10 @@
                 <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/ultra-ball.png" alt="Ultra Ball">
                 Crear Mazo
             </button>
+            <button onclick="showSection('pokemon-lessons')" class="pokeball-button">
+                <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/great-ball.png" alt="Great Ball">
+                Aprende a Jugar
+            </button>
         </nav>
     </header>
 
@@ -47,6 +51,49 @@
                 <!-- Cards will be dynamically loaded here -->
             </div>
         </section>
+
+        <section id="pokemon-lessons" class="section-container">
+            <h2>🎓 Aprende a Jugar Pokémon TCG 🎓</h2>
+            
+            <div class="lessons-container">
+                <div class="lesson-type group-lessons">
+                    <h3>🌟 Lecciones Grupales Gratuitas</h3>
+                    <div class="schedule-container">
+                        <p>¡Únete a nuestras sesiones gratuitas de aprendizaje! Consulta nuestro horario actual:</p>
+                        <button onclick="openScheduleModal()" class="schedule-button">Ver Horario de Clases</button>
+                    </div>
+                </div>
+
+                <div class="lesson-type private-lessons">
+                    <h3>👤 Lecciones Privadas</h3>
+                    <p>Disponible para lecciones personalizadas uno a uno.</p>
+                    <p>¡Las lecciones privadas están incluidas con la compra o construcción de un mazo!</p>
+                    <a href="mailto:s4m@s4mst4.org?subject=Solicitud%20de%20Lección%20Privada%20de%20Pokémon%20TCG&body=¡Hola!%0A%0AMe%20gustaría%20programar%20una%20lección%20privada%20para%20aprender%20Pokémon%20TCG.%20Por%20favor,%20háganme%20saber%20qué%20horarios%20están%20disponibles.%0A%0A¡Gracias!" class="lesson-button">Programa tu Lección</a>
+                </div>
+            </div>
+
+            <div class="game-overview">
+                <h3>🎮 Guía del Juego</h3>
+                <div class="overview-grid">
+                    <div class="overview-item">
+                        <h4>Reglas Básicas</h4>
+                        <p>Aprende las reglas fundamentales que necesitas para comenzar a jugar.</p>
+                    </div>
+                    <div class="overview-item">
+                        <h4>Estructura del Juego</h4>
+                        <p>Descubre cómo se desarrolla una partida y sus diferentes fases.</p>
+                    </div>
+                    <div class="overview-item">
+                        <h4>Mecánicas</h4>
+                        <p>Explora las diferentes mecánicas y estrategias del juego.</p>
+                    </div>
+                    <div class="overview-item">
+                        <h4>Tipos de Cartas</h4>
+                        <p>Conoce los diferentes tipos de cartas y cómo usarlas.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
     </main>
 
     <div id="contact-button" class="floating-contact">
@@ -67,6 +114,39 @@
             <img src="uvita_map.png" alt="Mapa de Uvita estilo Pokémon" class="uvita-map" onclick="openGoogleMaps()">
         </div>
     </footer>
+
+    <!-- Calendar Modal -->
+    <div id="scheduleModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button" onclick="closeScheduleModal()">&times;</span>
+            <h3>📅 Horario de Clases Grupales</h3>
+            <div class="calendar-container">
+                <div class="calendar-header">
+                    <button onclick="previousMonth()" class="calendar-nav-btn">&lt;</button>
+                    <h4 id="currentMonth">Mes Año</h4>
+                    <button onclick="nextMonth()" class="calendar-nav-btn">&gt;</button>
+                </div>
+                <div class="weekdays">
+                    <div>Dom</div>
+                    <div>Lun</div>
+                    <div>Mar</div>
+                    <div>Mié</div>
+                    <div>Jue</div>
+                    <div>Vie</div>
+                    <div>Sáb</div>
+                </div>
+                <div id="calendarDays" class="calendar-days">
+                    <!-- Days will be populated by JavaScript -->
+                </div>
+                <div class="calendar-legend">
+                    <div class="legend-item">
+                        <span class="legend-color has-class"></span>
+                        <span>Clase Grupal (2:00 PM - 4:00 PM)</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script src="script.js"></script>
 </body>
