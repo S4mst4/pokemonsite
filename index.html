@@ -1,30 +1,48 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Pokémon Card Shop</title>
+    <title>Súper Pokémon | pokemon.s4mst4.org</title>
     <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 </head>
 <body>
+    <div class="pokeball-cursor"></div>
     <header>
-        <h1>🌟 My Pokémon Card Shop 🌟</h1>
-        <nav>
-            <button onclick="showSection('ready-made-decks')">Ready-Made Decks</button>
-            <button onclick="showSection('custom-deck')">Build Custom Deck</button>
+        <div class="logo-container">
+            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/poke-ball.png" alt="Pokeball" class="rotating-pokeball">
+            <h1>⚡ Súper Pokémon ⚡</h1>
+            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/poke-ball.png" alt="Pokeball" class="rotating-pokeball">
+        </div>
+        <nav class="pokemon-nav">
+            <button onclick="showSection('ready-made-decks')" class="pokeball-button">
+                <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/master-ball.png" alt="Master Ball">
+                Mazos Preparados
+            </button>
+            <button onclick="showSection('custom-deck')" class="pokeball-button">
+                <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/ultra-ball.png" alt="Ultra Ball">
+                Crear Mazo
+            </button>
         </nav>
     </header>
 
     <main>
+        <div class="pokemon-banner">
+            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png" alt="Pikachu" class="banner-pokemon">
+            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/6.png" alt="Charizard" class="banner-pokemon">
+            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/150.png" alt="Mewtwo" class="banner-pokemon">
+        </div>
+
         <section id="ready-made-decks" class="active">
-            <h2>My Ready-Made Decks</h2>
+            <h2>🏆 Mazos Preparados 🏆</h2>
             <div class="deck-container">
                 <!-- Decks will be dynamically loaded here -->
             </div>
         </section>
 
         <section id="custom-deck" class="hidden">
-            <h2>Build Your Own Deck</h2>
+            <h2>🎮 Crea Tu Propio Mazo 🎮</h2>
             <div class="special-cards">
                 <!-- Cards will be dynamically loaded here -->
             </div>
@@ -32,11 +50,18 @@
     </main>
 
     <div id="contact-button" class="floating-contact">
-        <a href="tel://+15555555555" class="contact-link">📞 Contact Me +506 54M4 5t45</a>
+        <a href="tel://+15555555555" class="contact-link">
+            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/poke-ball.png" alt="Contact" class="contact-pokeball">
+            Contáctame +506 54M4 5t45
+        </a>
     </div>
 
     <footer>
-        <p>Made with ❤️ by a young Pokémon Trainer S4mSt4</p>
+        <div class="footer-content">
+            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/143.png" alt="Snorlax" class="footer-pokemon">
+            <p>Creado con ❤️ por el Entrenador Pokémon S4mSt4</p>
+            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/143.png" alt="Snorlax" class="footer-pokemon flip">
+        </div>
     </footer>
 
     <script src="script.js"></script>

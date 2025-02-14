@@ -118,15 +118,67 @@ function renderInventory() {
     });
 }
 
-function showSection(sectionId) {
-    // Hide all sections
-    document.querySelectorAll('main section').forEach(section => {
-        section.classList.add('hidden');
-        section.classList.remove('active');
-    });
+// Pokeball cursor animation
+const cursor = document.querySelector('.pokeball-cursor');
+const root = document.documentElement;
 
-    // Show the selected section
-    const selectedSection = document.getElementById(sectionId);
-    selectedSection.classList.remove('hidden');
-    selectedSection.classList.add('active');
-} 
+document.addEventListener('mousemove', (e) => {
+    cursor.style.display = 'block';
+    cursor.style.left = e.clientX - 10 + 'px';
+    cursor.style.top = e.clientY - 10 + 'px';
+});
+
+document.addEventListener('mousedown', () => {
+    cursor.style.transform = 'scale(0.8)';
+});
+
+document.addEventListener('mouseup', () => {
+    cursor.style.transform = 'scale(1)';
+});
+
+// Section switching animation
+function showSection(sectionId) {
+    const sections = document.querySelectorAll('section');
+    sections.forEach(section => {
+        if (section.id === sectionId) {
+            section.classList.remove('hidden');
+            section.classList.add('active');
+            section.style.animation = 'fadeIn 0.5s ease-in-out';
+        } else {
+            section.classList.add('hidden');
+            section.classList.remove('active');
+        }
+    });
+}
+
+// Add hover sound effect to buttons
+const buttons = document.querySelectorAll('button');
+const hoverSound = new Audio('https://play.pokemonshowdown.com/audio/sfx/generic_click.mp3');
+
+buttons.forEach(button => {
+    button.addEventListener('mouseenter', () => {
+        hoverSound.currentTime = 0;
+        hoverSound.volume = 0.2;
+        hoverSound.play();
+    });
+});
+
+// Random Pokemon animation in the banner
+const bannerPokemon = document.querySelectorAll('.banner-pokemon');
+setInterval(() => {
+    const randomPokemon = bannerPokemon[Math.floor(Math.random() * bannerPokemon.length)];
+    randomPokemon.style.animation = 'bounce 0.5s infinite alternate';
+    setTimeout(() => {
+        randomPokemon.style.animation = '';
+    }, 1000);
+}, 3000);
+
+// Add keyframe animation for fade in effect
+const style = document.createElement('style');
+style.textContent = `
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+`;
+document.head.appendChild(style); 
