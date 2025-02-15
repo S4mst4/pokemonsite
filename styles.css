@@ -668,4 +668,20 @@ h2 {
         transform: translateY(0);
         opacity: 1;
     }
+}
+
+.title-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+}
+
+.subtitle {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.8rem;
+    color: #ffd700;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    letter-spacing: 2px;
+    transform: translateY(-5px);
 } 
