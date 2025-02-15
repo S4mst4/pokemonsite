@@ -121,12 +121,66 @@ h1 {
 .pokemon-banner {
     display: flex;
     justify-content: center;
+    align-items: center;
     gap: 30px;
     margin: 20px 0;
     padding: 20px;
     background: rgba(255, 255, 255, 0.9);
     border-radius: 15px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: relative;
+    overflow: visible;
+}
+
+.cards-left, .cards-right {
+    position: relative;
+    width: 100px;
+    height: 140px;
+}
+
+.banner-card {
+    position: absolute;
+    width: 100px;
+    height: 140px;
+    transition: transform 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+}
+
+/* Left cards fan effect */
+.card-left-1 {
+    transform: rotate(-25deg) translateX(-20px);
+    z-index: 1;
+}
+
+.card-left-2 {
+    transform: rotate(-15deg) translateX(-10px);
+    z-index: 2;
+}
+
+.card-left-3 {
+    transform: rotate(-5deg);
+    z-index: 3;
+}
+
+/* Right cards fan effect */
+.card-right-1 {
+    transform: rotate(5deg);
+    z-index: 1;
+}
+
+.card-right-2 {
+    transform: rotate(15deg) translateX(10px);
+    z-index: 2;
+}
+
+.card-right-3 {
+    transform: rotate(25deg) translateX(20px);
+    z-index: 3;
+}
+
+.cards-left:hover .banner-card, .cards-right:hover .banner-card {
+    transform: rotate(0) translateX(0);
 }
 
 .banner-pokemon {
