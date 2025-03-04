@@ -1,0 +1,34 @@
+[
+    {
+        "id": "fire-power",
+        "name": "Fire Power(less noob) Deck",
+        "description": "It's a fire deck!!",
+        "price": 25.00,
+        "mainCard": {
+            "name": "Charizard VSTAR",
+            "image": "https://assets.pokemon.com/assets/cms2/img/cards/web/SWSH11/SWSH11_EN_177.png"
+        },
+        "cards": [
+            "Charizard VSTAR",
+            "Flareon V",
+            "Arcanine",
+            "Cinderace"
+        ]
+    },
+    {
+        "id": "psychic-masters",
+        "name": "Psychic Noob Deck",
+        "description": "It's a psychic deck!",
+        "price": 30.00,
+        "mainCard": {
+            "name": "Mew VMAX",
+            "image": "https://assets.pokemon.com/assets/cms2/img/cards/web/SWSH9/SWSH9_EN_154.png"
+        },
+        "cards": [
+            "Mew VMAX",
+            "Mewtwo V",
+            "Espeon",
+            "Gardevoir"
+        ]
+    }
+] 

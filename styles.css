@@ -16,14 +16,14 @@ body {
     background-image: url('https://assets.pokemon.com/static2/_ui/img/chrome/body_bg.png');
     background-repeat: repeat;
     font-family: 'Press Start 2P', cursive;
-    cursor: url('pokemon-assets/sprites/items/poke-ball.png') 15 15, auto;
+    cursor: url('assets/items/poke-ball.png') 15 15, auto;
 }
 
 /* Pokeball cursor animation */
 .pokeball-cursor {
     width: 20px;
     height: 20px;
-    background: url('pokemon-assets/sprites/items/poke-ball.png') no-repeat;
+    background: url('assets/items/poke-ball.png') no-repeat;
     background-size: contain;
     position: fixed;
     pointer-events: none;

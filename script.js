@@ -1,73 +1,26 @@
 // Global state
-const decks = [
-    {
-        id: "fire-power",
-        name: "Fire Power(less noob) Deck",
-        description: "It's a fire deck!!",
-        price: 25.00,
-        mainCard: {
-            name: "Charizard VSTAR",
-            image: "https://assets.pokemon.com/assets/cms2/img/cards/web/SWSH11/SWSH11_EN_177.png"
-        },
-        cards: [
-            "Charizard VSTAR",
-            "Flareon V",
-            "Arcanine",
-            "Cinderace"
-        ]
-    },
-    {
-        id: "psychic-masters",
-        name: "Psychic Noob Deck",
-        description: "It's a psychic deck!",
-        price: 30.00,
-        mainCard: {
-            name: "Mew VMAX",
-            image: "https://assets.pokemon.com/assets/cms2/img/cards/web/SWSH9/SWSH9_EN_154.png"
-        },
-        cards: [
-            "Mew VMAX",
-            "Mewtwo V",
-            "Espeon",
-            "Gardevoir"
-        ]
-    }
-];
-
-const inventory = [
-    {
-        id: "pikachu-v",
-        name: "Pikachu V",
-        price: 8.00,
-        image: "https://assets.pokemon.com/assets/cms2/img/cards/web/SWSH10/SWSH10_EN_172.png",
-        type: "Electric",
-        rarity: "V",
-        inStock: true
-    },
-    {
-        id: "mewtwo-vstar",
-        name: "Mewtwo VSTAR",
-        price: 15.00,
-        image: "https://assets.pokemon.com/assets/cms2/img/cards/web/SWSH9/SWSH9_EN_114.png",
-        type: "Psychic",
-        rarity: "VSTAR",
-        inStock: true
-    },
-    {
-        id: "gengar-vmax",
-        name: "Gengar VMAX",
-        price: 12.00,
-        image: "https://assets.pokemon.com/assets/cms2/img/cards/web/SWSH8/SWSH8_EN_157.png",
-        type: "Psychic",
-        rarity: "VMAX",
-        inStock: true
-    }
-];
+let decks = [];
+let inventory = [];
 
 // Initialize the application
 document.addEventListener('DOMContentLoaded', () => {
-    renderDecks();
-    renderInventory();
+    // Fetch decks data
+    fetch('assets/data/decks.json')
+        .then(response => response.json())
+        .then(data => {
+            decks = data;
+            renderDecks();
+        })
+        .catch(error => console.error('Error loading decks:', error));
+
+    // Fetch inventory data
+    fetch('assets/data/inventory.json')
+        .then(response => response.json())
+        .then(data => {
+            inventory = data;
+            renderInventory();
+        })
+        .catch(error => console.error('Error loading inventory:', error));
 });
 
 // Render the premade decks

@@ -1,0 +1,29 @@
+[
+    {
+        "id": "pikachu-v",
+        "name": "Pikachu V",
+        "price": 8.00,
+        "image": "https://assets.pokemon.com/assets/cms2/img/cards/web/SWSH10/SWSH10_EN_172.png",
+        "type": "Electric",
+        "rarity": "V",
+        "inStock": true
+    },
+    {
+        "id": "mewtwo-vstar",
+        "name": "Mewtwo VSTAR",
+        "price": 15.00,
+        "image": "https://assets.pokemon.com/assets/cms2/img/cards/web/SWSH9/SWSH9_EN_114.png",
+        "type": "Psychic",
+        "rarity": "VSTAR",
+        "inStock": true
+    },
+    {
+        "id": "gengar-vmax",
+        "name": "Gengar VMAX",
+        "price": 12.00,
+        "image": "https://assets.pokemon.com/assets/cms2/img/cards/web/SWSH8/SWSH8_EN_157.png",
+        "type": "Psychic",
+        "rarity": "VMAX",
+        "inStock": true
+    }
+] 
