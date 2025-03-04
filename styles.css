@@ -288,11 +288,13 @@ main {
 
 .card {
     background: rgba(255, 255, 255, 0.9);
-    border-radius: 10px;
+    border-radius: 16px;
     padding: 15px;
     text-align: center;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease;
+    position: relative;
+    padding-bottom: 60px;
 }
 
 .card:hover {
@@ -739,4 +741,144 @@ h2 {
     to {
         transform: rotate(360deg);
     }
+}
+
+.cart-container {
+    position: fixed;
+    top: 100px;
+    right: 20px;
+    width: 300px;
+    z-index: 1000;
+}
+
+.cart {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 15px;
+    border: 3px solid var(--pokemon-blue);
+    padding: 15px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.cart h3 {
+    color: var(--pokemon-blue);
+    margin-bottom: 15px;
+    text-align: center;
+    font-size: 1rem;
+}
+
+.cart-items {
+    max-height: 400px;
+    overflow-y: auto;
+    margin-bottom: 15px;
+}
+
+.cart-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+.cart-item img {
+    width: 50px;
+    height: auto;
+    border-radius: 5px;
+}
+
+.cart-item-details {
+    flex-grow: 1;
+}
+
+.cart-item-name {
+    font-size: 0.8rem;
+    color: #333;
+}
+
+.cart-item-price {
+    font-size: 0.9rem;
+    color: var(--pokemon-blue);
+    font-weight: bold;
+}
+
+.remove-from-cart {
+    background: var(--pokemon-red);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s ease;
+}
+
+.remove-from-cart:hover {
+    transform: scale(1.1);
+}
+
+.cart-total {
+    border-top: 2px dashed var(--pokemon-yellow);
+    padding-top: 15px;
+    text-align: center;
+}
+
+.cart-total p {
+    font-size: 1.1rem;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.checkout-button {
+    background: linear-gradient(to bottom, var(--pokemon-yellow) 0%, #c7a008 100%);
+    border: 2px solid var(--pokemon-blue);
+    border-radius: 25px;
+    color: #1a1a1a;
+    cursor: pointer;
+    font-size: 0.9rem;
+    padding: 10px 20px;
+    font-weight: bold;
+    width: 100%;
+    transition: all 0.3s ease;
+}
+
+.checkout-button:hover {
+    background: linear-gradient(to bottom, #ffde00 0%, var(--pokemon-yellow) 100%);
+    transform: translateY(-2px);
+}
+
+.cards-grid {
+    margin-right: 320px;
+}
+
+.add-to-cart {
+    background: white;
+    border: none;
+    border-radius: 12px;
+    color: var(--pokemon-blue);
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.add-to-cart:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(42, 117, 187, 0.2);
+}
+
+.add-to-cart:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 8px rgba(42, 117, 187, 0.2);
 } 

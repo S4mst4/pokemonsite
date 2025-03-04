@@ -1,6 +1,7 @@
 // Global state
 let decks = [];
 let cards = [];
+let cartItems = new Set();
 let currentPage = 0;
 const cardsPerPage = 20;
 let isLoading = false;
@@ -32,6 +33,9 @@ document.addEventListener('DOMContentLoaded', () => {
             handleInfiniteScroll();
         }
     });
+
+    // Add checkout button listener
+    document.getElementById('checkout-button').addEventListener('click', handleCheckout);
 });
 
 // Handle infinite scroll
@@ -61,16 +65,25 @@ function loadMoreCards() {
         cardsToLoad.forEach(card => {
             const cardElement = document.createElement('div');
             cardElement.className = 'card';
+            const price = card.tcgplayer?.prices?.holofoil?.market || 
+                         card.tcgplayer?.prices?.normal?.market || 
+                         'Price N/A';
             cardElement.innerHTML = `
                 <img src="${card.images.small}" alt="${card.name}" loading="lazy">
                 <h3>${card.name}</h3>
-                <p class="type">${card.supertype} - ${card.rarity || 'N/A'}</p>
-                <p class="price">$${card.tcgplayer?.prices?.holofoil?.market || 
-                                 card.tcgplayer?.prices?.normal?.market || 
-                                 'Price N/A'}</p>
-                <button class="buy-button">Comprar</button>
+                <p class="price">$${price}</p>
+                <button class="add-to-cart" data-card-id="${card.id}">
+                    <svg width="24" height="24" viewBox="0 0 24 24">
+                        <rect x="11" y="4" width="2" height="16" rx="1" fill="currentColor"/>
+                        <rect x="4" y="11" width="16" height="2" rx="1" fill="currentColor"/>
+                    </svg>
+                </button>
             `;
             container.appendChild(cardElement);
+
+            // Add click handler for the Add to Cart button
+            const addButton = cardElement.querySelector('.add-to-cart');
+            addButton.addEventListener('click', () => addToCart(card));
         });
 
         currentPage++;
@@ -83,6 +96,77 @@ function loadMoreCards() {
 
     isLoading = false;
     spinner.classList.add('hidden');
+}
+
+// Add to cart functionality
+function addToCart(card) {
+    if (!cartItems.has(card.id)) {
+        cartItems.add(card.id);
+        updateCartDisplay();
+    }
+}
+
+// Remove from cart functionality
+function removeFromCart(cardId) {
+    cartItems.delete(cardId);
+    updateCartDisplay();
+}
+
+// Update cart display
+function updateCartDisplay() {
+    const cartItemsContainer = document.querySelector('.cart-items');
+    cartItemsContainer.innerHTML = '';
+    let total = 0;
+
+    cartItems.forEach(cardId => {
+        const card = cards.find(c => c.id === cardId);
+        if (card) {
+            const price = card.tcgplayer?.prices?.holofoil?.market || 
+                         card.tcgplayer?.prices?.normal?.market || 
+                         0;
+            total += price;
+
+            const itemElement = document.createElement('div');
+            itemElement.className = 'cart-item';
+            itemElement.innerHTML = `
+                <img src="${card.images.small}" alt="${card.name}">
+                <div class="cart-item-details">
+                    <div class="cart-item-name">${card.name}</div>
+                    <div class="cart-item-price">$${price}</div>
+                </div>
+                <button class="remove-from-cart" data-card-id="${card.id}">×</button>
+            `;
+            cartItemsContainer.appendChild(itemElement);
+
+            // Add click handler for remove button
+            const removeButton = itemElement.querySelector('.remove-from-cart');
+            removeButton.addEventListener('click', () => removeFromCart(card.id));
+        }
+    });
+
+    // Update total
+    document.getElementById('cart-total-amount').textContent = total.toFixed(2);
+}
+
+// Handle checkout
+function handleCheckout() {
+    if (cartItems.size === 0) {
+        alert('Your cart is empty!');
+        return;
+    }
+
+    const cartData = Array.from(cartItems).map(cardId => {
+        const card = cards.find(c => c.id === cardId);
+        return {
+            id: card.id,
+            name: card.name,
+            price: card.tcgplayer?.prices?.holofoil?.market || 
+                   card.tcgplayer?.prices?.normal?.market || 0
+        };
+    });
+
+    const mailtoLink = `mailto:sam@s4mst4.org?subject=Pokemon Card Order&body=${encodeURIComponent(JSON.stringify(cartData, null, 2))}`;
+    window.location.href = mailtoLink;
 }
 
 // Render the premade decks
