@@ -36,7 +36,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Add checkout button listener
     document.getElementById('checkout-button').addEventListener('click', handleCheckout);
+
+    // Add cart toggle listener
+    document.querySelector('.cart-toggle').addEventListener('click', toggleCart);
 });
+
+// Toggle cart visibility
+function toggleCart() {
+    const cart = document.querySelector('.cart');
+    cart.classList.toggle('collapsed');
+}
 
 // Handle infinite scroll
 function handleInfiniteScroll() {
@@ -115,8 +124,11 @@ function removeFromCart(cardId) {
 // Update cart display
 function updateCartDisplay() {
     const cartItemsContainer = document.querySelector('.cart-items');
+    const cartCount = document.querySelector('.cart-count');
     cartItemsContainer.innerHTML = '';
     let total = 0;
+
+    cartCount.textContent = cartItems.size;
 
     cartItems.forEach(cardId => {
         const card = cards.find(c => c.id === cardId);
@@ -146,6 +158,11 @@ function updateCartDisplay() {
 
     // Update total
     document.getElementById('cart-total-amount').textContent = total.toFixed(2);
+
+    // Show cart when adding items
+    if (cartItems.size > 0) {
+        document.querySelector('.cart').classList.remove('collapsed');
+    }
 }
 
 // Handle checkout
