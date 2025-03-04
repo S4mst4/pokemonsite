@@ -1,6 +1,10 @@
 // Global state
 let decks = [];
-let inventory = [];
+let cards = [];
+let currentPage = 0;
+const cardsPerPage = 20;
+let isLoading = false;
+let hasMoreCards = true;
 
 // Initialize the application
 document.addEventListener('DOMContentLoaded', () => {
@@ -13,15 +17,73 @@ document.addEventListener('DOMContentLoaded', () => {
         })
         .catch(error => console.error('Error loading decks:', error));
 
-    // Fetch inventory data
-    fetch('assets/data/inventory.json')
+    // Fetch cards data
+    fetch('assets/data/CARDSFROMBOOK.json')
         .then(response => response.json())
         .then(data => {
-            inventory = data;
-            renderInventory();
+            cards = data;
+            loadMoreCards();
         })
-        .catch(error => console.error('Error loading inventory:', error));
+        .catch(error => console.error('Error loading cards:', error));
+
+    // Add infinite scroll listener
+    window.addEventListener('scroll', () => {
+        if (document.querySelector('#cards-for-sale').classList.contains('active')) {
+            handleInfiniteScroll();
+        }
+    });
 });
+
+// Handle infinite scroll
+function handleInfiniteScroll() {
+    const endOfPage = window.innerHeight + window.pageYOffset >= document.documentElement.scrollHeight - 1000;
+    
+    if (endOfPage && !isLoading && hasMoreCards) {
+        loadMoreCards();
+    }
+}
+
+// Load more cards
+function loadMoreCards() {
+    if (isLoading || !hasMoreCards) return;
+
+    isLoading = true;
+    const spinner = document.getElementById('loading-spinner');
+    spinner.classList.remove('hidden');
+
+    const start = currentPage * cardsPerPage;
+    const end = start + cardsPerPage;
+    const cardsToLoad = cards.slice(start, end);
+
+    if (cardsToLoad.length > 0) {
+        const container = document.querySelector('.cards-grid');
+        
+        cardsToLoad.forEach(card => {
+            const cardElement = document.createElement('div');
+            cardElement.className = 'card';
+            cardElement.innerHTML = `
+                <img src="${card.images.small}" alt="${card.name}" loading="lazy">
+                <h3>${card.name}</h3>
+                <p class="type">${card.supertype} - ${card.rarity || 'N/A'}</p>
+                <p class="price">$${card.tcgplayer?.prices?.holofoil?.market || 
+                                 card.tcgplayer?.prices?.normal?.market || 
+                                 'Price N/A'}</p>
+                <button class="buy-button">Comprar</button>
+            `;
+            container.appendChild(cardElement);
+        });
+
+        currentPage++;
+        if (end >= cards.length) {
+            hasMoreCards = false;
+        }
+    } else {
+        hasMoreCards = false;
+    }
+
+    isLoading = false;
+    spinner.classList.add('hidden');
+}
 
 // Render the premade decks
 function renderDecks() {

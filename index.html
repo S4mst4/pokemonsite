@@ -31,9 +31,9 @@
                 <img src="assets/ui/deck.png" alt="Deck">
                 Mazos Preparados
             </button>
-            <button onclick="showSection('custom-deck')" class="pokeball-button">
+            <button onclick="showSection('cards-for-sale')" class="pokeball-button">
                 <img src="assets/ui/collection.png" alt="Collection">
-                Crear Mazo
+                Cartas en Venta
             </button>
             <button onclick="showSection('pokemon-lessons')" class="pokeball-button">
                 <img src="assets/ui/hand.png" alt="Hand">
@@ -66,10 +66,13 @@
             </div>
         </section>
 
-        <section id="custom-deck" class="hidden">
-            <h2>🎮 Crea Tu Propio Mazo 🎮</h2>
-            <div class="special-cards">
+        <section id="cards-for-sale" class="hidden">
+            <h2>🎴 Cartas en Venta 🎴</h2>
+            <div class="cards-grid">
                 <!-- Cards will be dynamically loaded here -->
+            </div>
+            <div id="loading-spinner" class="loading-spinner hidden">
+                <img src="assets/items/poke-ball.png" alt="Loading..." class="rotating-pokeball">
             </div>
         </section>
 
