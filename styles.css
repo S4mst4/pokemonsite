@@ -749,6 +749,7 @@ h2 {
     right: 20px;
     width: 300px;
     z-index: 1000;
+    pointer-events: none;
 }
 
 .cart-toggle {
@@ -767,6 +768,7 @@ h2 {
     justify-content: center;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     transition: all 0.3s ease;
+    pointer-events: auto;
 }
 
 .cart-toggle:hover {
@@ -797,6 +799,7 @@ h2 {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     transition: transform 0.3s ease, opacity 0.3s ease;
     transform-origin: top right;
+    pointer-events: auto;
 }
 
 .cart.collapsed {
@@ -885,6 +888,7 @@ h2 {
     padding: 8px;
     border-bottom: 1px solid rgba(42, 117, 187, 0.2);
     position: relative;
+    pointer-events: auto;
 }
 
 .cart-item img {
@@ -919,6 +923,7 @@ h2 {
     line-height: 1;
     opacity: 0.7;
     transition: opacity 0.2s ease;
+    pointer-events: auto;
 }
 
 .remove-from-cart:hover {
@@ -943,12 +948,13 @@ h2 {
     font-size: 0.9rem;
     cursor: pointer;
     transition: all 0.2s ease;
+    pointer-events: auto;
 }
 
 .checkout-button:hover {
     background: var(--pokemon-dark-blue);
     transform: translateY(-2px);
-} 
+}
 
 .cart-total {
     display: flex;
@@ -968,6 +974,7 @@ h2 {
     cursor: pointer;
     transition: all 0.3s ease;
     font-size: 0.9em;
+    pointer-events: auto;
 }
 
 .discount-button:hover {
@@ -986,6 +993,7 @@ h2 {
     margin: 8px 0;
     cursor: pointer;
     transition: all 0.3s ease;
+    pointer-events: auto;
 }
 
 .discount-banner:hover {
