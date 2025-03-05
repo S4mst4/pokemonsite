@@ -12,8 +12,30 @@ let hasMoreCards = true;
 let isNewCustomerDiscount = false;
 const NEW_CUSTOMER_DISCOUNT = 0.15; // 15% discount
 
+// Function to get URL parameters
+function getUrlParam(param) {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get(param);
+}
+
+// Function to map URL parameter to section ID
+function mapUrlParamToSection(param) {
+    const sectionMap = {
+        'cartas': 'cards-for-sale',
+        'mazos': 'ready-made-decks',
+        'clases': 'pokemon-lessons'
+    };
+    return sectionMap[param] || 'ready-made-decks'; // Default to ready-made-decks if param not found
+}
+
 // Initialize the application
 document.addEventListener('DOMContentLoaded', () => {
+    // Check for URL parameters and show appropriate section
+    const pageParam = getUrlParam('p');
+    if (pageParam) {
+        showSection(mapUrlParamToSection(pageParam));
+    }
+
     // Fetch decks data
     fetch('assets/data/decks.json')
         .then(response => response.json())
