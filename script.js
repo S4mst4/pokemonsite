@@ -209,15 +209,33 @@ function handleCheckout() {
         return;
     }
 
-    const cartData = Array.from(cartItems).map(cardId => {
-        const card = cards.find(c => c.id === cardId);
-        return {
-            id: card.id,
-            name: card.name,
-            price: card.tcgplayer?.prices?.holofoil?.market || 
-                   card.tcgplayer?.prices?.normal?.market || 0
-        };
-    });
+    const cartData = {
+        items: Array.from(cartItems).map(cardId => {
+            const card = cards.find(c => c.id === cardId);
+            return {
+                id: card.id,
+                name: card.name,
+                price: card.tcgplayer?.prices?.holofoil?.market || 
+                       card.tcgplayer?.prices?.normal?.market || 0
+            };
+        }),
+        newCustomerDiscount: isNewCustomerDiscount,
+        discountPercentage: isNewCustomerDiscount ? NEW_CUSTOMER_DISCOUNT * 100 : 0,
+        subtotal: parseFloat(document.getElementById('original-amount').textContent),
+        total: parseFloat(document.getElementById('cart-total-amount').textContent)
+    };
+
+    // Create and download the JSON file
+    const jsonString = JSON.stringify(cartData, null, 2);
+    const blob = new Blob([jsonString], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'my_s4mst4_cart.json';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
 
     const mailtoLink = `mailto:sam@s4mst4.org?subject=Pokemon Card Order&body=${encodeURIComponent(JSON.stringify(cartData, null, 2))}`;
     window.location.href = mailtoLink;
