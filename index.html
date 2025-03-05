@@ -62,6 +62,42 @@
             </div>
         </div>
 
+        <div class="cart-container">
+            <button class="cart-toggle">
+                <span class="cart-count">0</span>
+                🛒
+            </button>
+            <div class="cart collapsed">
+                <h3>🛒 Carrito</h3>
+                <div class="cart-items">
+                    <!-- Cart items will be added here -->
+                </div>
+                <div class="cart-total">
+                    <div class="price-display">
+                        <button id="new-customer-button" class="discount-button">
+                            🎉 New Customer? Click for 15% OFF!
+                        </button>
+                        <div id="discount-banner" class="discount-banner hidden">
+                            <span class="discount-text">15% OFF APPLIED! 🎊</span>
+                        </div>
+                        <div class="original-price hidden">
+                            Original: <span class="strikethrough">$<span id="original-amount">0.00</span></span>
+                        </div>
+                        <div class="final-price">
+                            <div class="price-row">
+                                <span class="total-label">Total:</span>
+                                <span class="price-amount">$<span id="cart-total-amount">0.00</span></span>
+                            </div>
+                            <span class="discount-label hidden">-15% OFF!</span>
+                        </div>
+                    </div>
+                    <button id="checkout-button" class="checkout-button">
+                        ✉️ Checkout
+                    </button>
+                </div>
+            </div>
+        </div>
+
         <section id="ready-made-decks" class="active">
             <h2>🏆 Mazos Preparados 🏆</h2>
             <div class="deck-container">
@@ -71,41 +107,6 @@
 
         <section id="cards-for-sale" class="hidden">
             <h2>🎴 Cartas en Venta 🎴</h2>
-            <div class="cart-container">
-                <button class="cart-toggle">
-                    <span class="cart-count">0</span>
-                    🛒
-                </button>
-                <div class="cart collapsed">
-                    <h3>🛒 Carrito</h3>
-                    <div class="cart-items">
-                        <!-- Cart items will be added here -->
-                    </div>
-                    <div class="cart-total">
-                        <div class="price-display">
-                            <button id="new-customer-button" class="discount-button">
-                                🎉 New Customer? Click for 15% OFF!
-                            </button>
-                            <div id="discount-banner" class="discount-banner hidden">
-                                <span class="discount-text">15% OFF APPLIED! 🎊</span>
-                            </div>
-                            <div class="original-price hidden">
-                                Original: <span class="strikethrough">$<span id="original-amount">0.00</span></span>
-                            </div>
-                            <div class="final-price">
-                                <div class="price-row">
-                                    <span class="total-label">Total:</span>
-                                    <span class="price-amount">$<span id="cart-total-amount">0.00</span></span>
-                                </div>
-                                <span class="discount-label hidden">-15% OFF!</span>
-                            </div>
-                        </div>
-                        <button id="checkout-button" class="checkout-button">
-                            ✉️ Checkout
-                        </button>
-                    </div>
-                </div>
-            </div>
             <div class="cards-grid">
                 <!-- Cards will be dynamically loaded here -->
             </div>

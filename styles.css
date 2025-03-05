@@ -755,7 +755,7 @@ h2 {
     position: absolute;
     right: 0;
     top: -50px;
-    background: var(--pokemon-blue);
+    background: var(--pokemon-yellow);
     border: none;
     border-radius: 50%;
     width: 50px;
@@ -831,7 +831,7 @@ h2 {
     }
 }
 
-.add-to-cart {
+.add-to-cart, .add-to-cart-deck {
     background: white;
     border: none;
     border-radius: 12px;
@@ -843,21 +843,33 @@ h2 {
     display: flex;
     align-items: center;
     justify-content: center;
-    position: absolute;
-    bottom: 15px;
-    right: 15px;
     transition: all 0.2s ease;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-.add-to-cart:hover {
+.add-to-cart {
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+}
+
+.add-to-cart-deck {
+    margin: 15px auto 0;
+}
+
+.add-to-cart:hover, .add-to-cart-deck:hover {
     transform: translateY(-2px);
     box-shadow: 0 6px 16px rgba(42, 117, 187, 0.2);
 }
 
-.add-to-cart:active {
+.add-to-cart:active, .add-to-cart-deck:active {
     transform: translateY(0);
     box-shadow: 0 2px 8px rgba(42, 117, 187, 0.2);
+}
+
+.add-to-cart svg, .add-to-cart-deck svg {
+    width: 20px;
+    height: 20px;
 }
 
 .cart-items {

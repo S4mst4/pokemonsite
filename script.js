@@ -1,7 +1,10 @@
 // Global state
 let decks = [];
 let cards = [];
-let cartItems = new Set();
+let cartItems = {
+    cards: new Set(),
+    decks: new Set()
+};
 let currentPage = 0;
 const cardsPerPage = 20;
 let isLoading = false;
@@ -114,16 +117,16 @@ function loadMoreCards() {
 }
 
 // Add to cart functionality
-function addToCart(card) {
-    if (!cartItems.has(card.id)) {
-        cartItems.add(card.id);
+function addToCart(item, type = 'cards') {
+    if (!cartItems[type].has(item.id)) {
+        cartItems[type].add(item.id);
         updateCartDisplay();
     }
 }
 
 // Remove from cart functionality
-function removeFromCart(cardId) {
-    cartItems.delete(cardId);
+function removeFromCart(itemId, type = 'cards') {
+    cartItems[type].delete(itemId);
     updateCartDisplay();
 }
 
@@ -161,9 +164,36 @@ function updateCartDisplay() {
     cartItemsContainer.innerHTML = '';
     let subtotal = 0;
 
-    cartCount.textContent = cartItems.size;
+    // Total items count
+    const totalItems = cartItems.cards.size + cartItems.decks.size;
+    cartCount.textContent = totalItems;
 
-    cartItems.forEach(cardId => {
+    // Add deck items
+    cartItems.decks.forEach(deckId => {
+        const deck = decks.find(d => d.id === deckId);
+        if (deck) {
+            subtotal += deck.price;
+
+            const itemElement = document.createElement('div');
+            itemElement.className = 'cart-item';
+            itemElement.innerHTML = `
+                <img src="${deck.mainCard.image}" alt="${deck.name}">
+                <div class="cart-item-details">
+                    <div class="cart-item-name">${deck.name}</div>
+                    <div class="cart-item-price">$${deck.price.toFixed(2)}</div>
+                </div>
+                <button class="remove-from-cart" data-item-id="${deck.id}" data-item-type="decks">×</button>
+            `;
+            cartItemsContainer.appendChild(itemElement);
+
+            // Add click handler for remove button
+            const removeButton = itemElement.querySelector('.remove-from-cart');
+            removeButton.addEventListener('click', () => removeFromCart(deck.id, 'decks'));
+        }
+    });
+
+    // Add card items
+    cartItems.cards.forEach(cardId => {
         const card = cards.find(c => c.id === cardId);
         if (card) {
             const price = card.tcgplayer?.prices?.holofoil?.market || 
@@ -179,13 +209,13 @@ function updateCartDisplay() {
                     <div class="cart-item-name">${card.name}</div>
                     <div class="cart-item-price">$${price}</div>
                 </div>
-                <button class="remove-from-cart" data-card-id="${card.id}">×</button>
+                <button class="remove-from-cart" data-item-id="${card.id}" data-item-type="cards">×</button>
             `;
             cartItemsContainer.appendChild(itemElement);
 
             // Add click handler for remove button
             const removeButton = itemElement.querySelector('.remove-from-cart');
-            removeButton.addEventListener('click', () => removeFromCart(card.id));
+            removeButton.addEventListener('click', () => removeFromCart(card.id, 'cards'));
         }
     });
 
@@ -197,20 +227,28 @@ function updateCartDisplay() {
     document.getElementById('cart-total-amount').textContent = total.toFixed(2);
 
     // Show cart when adding items
-    if (cartItems.size > 0) {
+    if (totalItems > 0) {
         document.querySelector('.cart').classList.remove('collapsed');
     }
 }
 
 // Handle checkout
 function handleCheckout() {
-    if (cartItems.size === 0) {
+    if (cartItems.cards.size === 0 && cartItems.decks.size === 0) {
         alert('Your cart is empty!');
         return;
     }
 
     const cartData = {
-        items: Array.from(cartItems).map(cardId => {
+        decks: Array.from(cartItems.decks).map(deckId => {
+            const deck = decks.find(d => d.id === deckId);
+            return {
+                id: deck.id,
+                name: deck.name,
+                price: deck.price
+            };
+        }),
+        cards: Array.from(cartItems.cards).map(cardId => {
             const card = cards.find(c => c.id === cardId);
             return {
                 id: card.id,
@@ -250,16 +288,21 @@ function renderDecks() {
             <h3>${deck.name}</h3>
             <p>${deck.description}</p>
             <p class="price">$${deck.price.toFixed(2)}</p>
-            <button class="buy-button">Buy Now</button>
+            <button class="add-to-cart-deck" data-deck-id="${deck.id}">
+                <svg width="24" height="24" viewBox="0 0 24 24">
+                    <rect x="11" y="4" width="2" height="16" rx="1" fill="currentColor"/>
+                    <rect x="4" y="11" width="16" height="2" rx="1" fill="currentColor"/>
+                </svg>
+            </button>
         </div>
     `).join('');
 
-    // Add click handlers for buy buttons
-    document.querySelectorAll('.buy-button').forEach(button => {
+    // Add click handlers for add to cart buttons
+    document.querySelectorAll('.add-to-cart-deck').forEach(button => {
         button.addEventListener('click', function() {
-            const deckId = this.parentElement.dataset.deckId;
+            const deckId = this.dataset.deckId;
             const deck = decks.find(d => d.id === deckId);
-            alert(`Thanks for your interest in the ${deck.name}!\nPrice: $${deck.price.toFixed(2)}\n\nPlease ask your parents to help you with the purchase!`);
+            addToCart(deck, 'decks');
         });
     });
 }
