@@ -3,7 +3,8 @@ let decks = [];
 let cards = [];
 let cartItems = {
     cards: new Set(),
-    decks: new Set()
+    decks: new Set(),
+    lessons: new Set()
 };
 let currentPage = 0;
 const cardsPerPage = 20;
@@ -11,6 +12,7 @@ let isLoading = false;
 let hasMoreCards = true;
 let isNewCustomerDiscount = false;
 const NEW_CUSTOMER_DISCOUNT = 0.15; // 15% discount
+const PRIVATE_LESSON_PRICE = 10.00; // Price for a private lesson
 
 // Function to get URL parameters
 function getUrlParam(param) {
@@ -70,6 +72,15 @@ document.addEventListener('DOMContentLoaded', () => {
     // Add new customer discount button listeners
     document.getElementById('new-customer-button').addEventListener('click', toggleNewCustomerDiscount);
     document.getElementById('discount-banner').addEventListener('click', toggleNewCustomerDiscount);
+
+    // Add private lesson button listener
+    document.querySelector('.add-to-cart-lesson').addEventListener('click', () => {
+        addToCart({
+            id: 'private-lesson',
+            name: 'Lección Privada',
+            price: PRIVATE_LESSON_PRICE
+        }, 'lessons');
+    });
 });
 
 // Toggle cart visibility
@@ -187,7 +198,7 @@ function updateCartDisplay() {
     let subtotal = 0;
 
     // Total items count
-    const totalItems = cartItems.cards.size + cartItems.decks.size;
+    const totalItems = cartItems.cards.size + cartItems.decks.size + cartItems.lessons.size;
     cartCount.textContent = totalItems;
 
     // Add deck items
@@ -241,6 +252,29 @@ function updateCartDisplay() {
         }
     });
 
+    // Add lesson items
+    cartItems.lessons.forEach(lessonId => {
+        if (lessonId === 'private-lesson') {
+            subtotal += PRIVATE_LESSON_PRICE;
+
+            const itemElement = document.createElement('div');
+            itemElement.className = 'cart-item';
+            itemElement.innerHTML = `
+                <img src="assets/ui/hand.png" alt="Private Lesson">
+                <div class="cart-item-details">
+                    <div class="cart-item-name">Lección Privada</div>
+                    <div class="cart-item-price">$${PRIVATE_LESSON_PRICE.toFixed(2)}</div>
+                </div>
+                <button class="remove-from-cart" data-item-id="${lessonId}" data-item-type="lessons">×</button>
+            `;
+            cartItemsContainer.appendChild(itemElement);
+
+            // Add click handler for remove button
+            const removeButton = itemElement.querySelector('.remove-from-cart');
+            removeButton.addEventListener('click', () => removeFromCart(lessonId, 'lessons'));
+        }
+    });
+
     // Update original price
     document.getElementById('original-amount').textContent = subtotal.toFixed(2);
 
@@ -256,7 +290,7 @@ function updateCartDisplay() {
 
 // Handle checkout
 function handleCheckout() {
-    if (cartItems.cards.size === 0 && cartItems.decks.size === 0) {
+    if (cartItems.cards.size === 0 && cartItems.decks.size === 0 && cartItems.lessons.size === 0) {
         alert('Your cart is empty!');
         return;
     }
@@ -279,6 +313,11 @@ function handleCheckout() {
                        card.tcgplayer?.prices?.normal?.market || 0
             };
         }),
+        lessons: Array.from(cartItems.lessons).map(lessonId => ({
+            id: lessonId,
+            name: 'Lección Privada',
+            price: PRIVATE_LESSON_PRICE
+        })),
         newCustomerDiscount: isNewCustomerDiscount,
         discountPercentage: isNewCustomerDiscount ? NEW_CUSTOMER_DISCOUNT * 100 : 0,
         subtotal: parseFloat(document.getElementById('original-amount').textContent),
