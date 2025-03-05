@@ -14,6 +14,9 @@
 
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <style>
+        
+    </style>
 </head>
 <body>
     <div class="pokeball-cursor"></div>
@@ -79,9 +82,26 @@
                         <!-- Cart items will be added here -->
                     </div>
                     <div class="cart-total">
-                        <p>Total: $<span id="cart-total-amount">0.00</span></p>
+                        <div class="price-display">
+                            <button id="new-customer-button" class="discount-button">
+                                🎉 New Customer? Click for 15% OFF!
+                            </button>
+                            <div id="discount-banner" class="discount-banner hidden">
+                                <span class="discount-text">15% OFF APPLIED! 🎊</span>
+                            </div>
+                            <div class="original-price hidden">
+                                Original: <span class="strikethrough">$<span id="original-amount">0.00</span></span>
+                            </div>
+                            <div class="final-price">
+                                <div class="price-row">
+                                    <span class="total-label">Total:</span>
+                                    <span class="price-amount">$<span id="cart-total-amount">0.00</span></span>
+                                </div>
+                                <span class="discount-label hidden">-15% OFF!</span>
+                            </div>
+                        </div>
                         <button id="checkout-button" class="checkout-button">
-                            Checkout
+                            ✉️ Checkout
                         </button>
                     </div>
                 </div>

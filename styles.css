@@ -937,3 +937,131 @@ h2 {
     background: var(--pokemon-dark-blue);
     transform: translateY(-2px);
 } 
+
+.cart-total {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px;
+}
+
+.discount-button {
+    width: 100%;
+    padding: 8px;
+    margin: 8px 0;
+    background-color: #FFD700;
+    border: 2px solid #B8860B;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.9em;
+}
+
+.discount-button:hover {
+    background-color: #FFC600;
+    transform: scale(1.02);
+}
+
+.discount-banner {
+    background-color: #FF4500;
+    color: white;
+    padding: 8px;
+    text-align: center;
+    font-size: 1em;
+    font-weight: bold;
+    border-radius: 8px;
+    margin: 8px 0;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.discount-banner:hover {
+    background-color: #FF6347;
+    transform: scale(1.02);
+}
+
+.discount-banner.hidden {
+    display: none;
+}
+
+.price-display {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin: 0;
+    text-align: center;
+    width: 100%;
+}
+
+.original-price {
+    color: #666;
+    font-size: 0.9em;
+    margin-bottom: 4px;
+}
+
+.original-price.hidden {
+    display: none;
+}
+
+.strikethrough {
+    text-decoration: line-through;
+    color: #999;
+}
+
+.final-price {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+}
+
+.price-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+.price-amount {
+    color: #2ecc71;
+}
+
+.discount-label {
+    background-color: #e74c3c;
+    color: white;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 0.8em;
+    margin-top: 2px;
+}
+
+.discount-label.hidden {
+    display: none;
+}
+
+.discount-text {
+    display: block;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    font-size: 0.9em;
+}
+
+.checkout-button {
+    width: 100%;
+    padding: 10px;
+    background-color: #2ecc71;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 8px;
+}
+
+.checkout-button:hover {
+    background-color: #27ae60;
+    transform: scale(1.02);
+}

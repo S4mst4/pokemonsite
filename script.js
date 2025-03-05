@@ -6,6 +6,8 @@ let currentPage = 0;
 const cardsPerPage = 20;
 let isLoading = false;
 let hasMoreCards = true;
+let isNewCustomerDiscount = false;
+const NEW_CUSTOMER_DISCOUNT = 0.15; // 15% discount
 
 // Initialize the application
 document.addEventListener('DOMContentLoaded', () => {
@@ -39,6 +41,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Add cart toggle listener
     document.querySelector('.cart-toggle').addEventListener('click', toggleCart);
+
+    // Add new customer discount button listeners
+    document.getElementById('new-customer-button').addEventListener('click', toggleNewCustomerDiscount);
+    document.getElementById('discount-banner').addEventListener('click', toggleNewCustomerDiscount);
 });
 
 // Toggle cart visibility
@@ -121,12 +127,39 @@ function removeFromCart(cardId) {
     updateCartDisplay();
 }
 
+// Toggle new customer discount
+function toggleNewCustomerDiscount() {
+    isNewCustomerDiscount = !isNewCustomerDiscount;
+    const discountButton = document.getElementById('new-customer-button');
+    const discountBanner = document.getElementById('discount-banner');
+    const originalPrice = document.querySelector('.original-price');
+    const discountLabel = document.querySelector('.discount-label');
+
+    if (isNewCustomerDiscount) {
+        discountButton.style.display = 'none';
+        discountBanner.classList.remove('hidden');
+        originalPrice.classList.remove('hidden');
+        discountLabel.classList.remove('hidden');
+    } else {
+        discountButton.style.display = 'block';
+        discountBanner.classList.add('hidden');
+        originalPrice.classList.add('hidden');
+        discountLabel.classList.add('hidden');
+    }
+    updateCartDisplay();
+}
+
+// Apply new customer discount
+function applyNewCustomerDiscount() {
+    toggleNewCustomerDiscount();
+}
+
 // Update cart display
 function updateCartDisplay() {
     const cartItemsContainer = document.querySelector('.cart-items');
     const cartCount = document.querySelector('.cart-count');
     cartItemsContainer.innerHTML = '';
-    let total = 0;
+    let subtotal = 0;
 
     cartCount.textContent = cartItems.size;
 
@@ -136,7 +169,7 @@ function updateCartDisplay() {
             const price = card.tcgplayer?.prices?.holofoil?.market || 
                          card.tcgplayer?.prices?.normal?.market || 
                          0;
-            total += price;
+            subtotal += price;
 
             const itemElement = document.createElement('div');
             itemElement.className = 'cart-item';
@@ -156,7 +189,11 @@ function updateCartDisplay() {
         }
     });
 
-    // Update total
+    // Update original price
+    document.getElementById('original-amount').textContent = subtotal.toFixed(2);
+
+    // Calculate final total with discount if applicable
+    const total = isNewCustomerDiscount ? subtotal * (1 - NEW_CUSTOMER_DISCOUNT) : subtotal;
     document.getElementById('cart-total-amount').textContent = total.toFixed(2);
 
     // Show cart when adding items
