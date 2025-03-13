@@ -33,11 +33,21 @@ function mapUrlParamToSection(param) {
 
 // Initialize the application
 document.addEventListener('DOMContentLoaded', () => {
-    // Check for URL parameters and show appropriate section
-    const pageParam = getUrlParam('p');
-    if (pageParam) {
-        showSection(mapUrlParamToSection(pageParam));
-    }
+    // Fetch cards data first to ensure cards are loaded before showing sections
+    fetch('assets/data/CARDSFROMBOOK.json')
+        .then(response => response.json())
+        .then(data => {
+            cards = data;
+            
+            // After cards are loaded, check for URL parameters and show appropriate section
+            const pageParam = getUrlParam('p');
+            if (pageParam) {
+                showSection(mapUrlParamToSection(pageParam));
+            } else {
+                loadMoreCards(); // If no specific section, load cards for default view
+            }
+        })
+        .catch(error => console.error('Error loading cards:', error));
 
     // Fetch decks data
     fetch('assets/data/decks.json')
@@ -47,15 +57,6 @@ document.addEventListener('DOMContentLoaded', () => {
             renderDecks();
         })
         .catch(error => console.error('Error loading decks:', error));
-
-    // Fetch cards data
-    fetch('assets/data/CARDSFROMBOOK.json')
-        .then(response => response.json())
-        .then(data => {
-            cards = data;
-            loadMoreCards();
-        })
-        .catch(error => console.error('Error loading cards:', error));
 
     // Add infinite scroll listener
     window.addEventListener('scroll', () => {
@@ -111,6 +112,16 @@ function loadMoreCards() {
 
     const start = currentPage * cardsPerPage;
     const end = start + cardsPerPage;
+    
+    // Make sure we have cards loaded before trying to slice them
+    if (cards.length === 0) {
+        // Cards haven't been loaded yet, retry after a short delay
+        isLoading = false;
+        spinner.classList.add('hidden');
+        setTimeout(loadMoreCards, 500);
+        return;
+    }
+    
     const cardsToLoad = cards.slice(start, end);
 
     if (cardsToLoad.length > 0) {
