@@ -102,6 +102,18 @@ h1 {
     gap: 10px;
 }
 
+.pokeball-button.active-nav {
+    background: linear-gradient(to bottom, var(--pokemon-blue) 0%, var(--pokemon-dark-blue) 100%);
+    border: 3px solid var(--pokemon-yellow);
+    color: white;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.25);
+}
+
+.pokeball-button.active-nav img {
+    transform: rotate(180deg);
+}
+
 .pokeball-button img {
     width: 25px;
     height: 25px;
@@ -1084,4 +1096,18 @@ h2 {
 .checkout-button:hover {
     background-color: #27ae60;
     transform: scale(1.02);
+}
+
+.content-section {
+    margin-bottom: 40px;
+    transition: all 0.5s ease;
+}
+
+.content-section.hidden {
+    display: none;
+}
+
+.content-section.active {
+    display: block;
+    animation: fadeIn 0.5s ease-in-out;
 }

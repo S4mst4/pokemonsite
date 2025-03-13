@@ -25,9 +25,10 @@ function mapUrlParamToSection(param) {
     const sectionMap = {
         'cartas': 'cards-for-sale',
         'mazos': 'ready-made-decks',
-        'clases': 'pokemon-lessons'
+        'clases': 'pokemon-lessons',
+        'todos': 'all'
     };
-    return sectionMap[param] || 'ready-made-decks'; // Default to ready-made-decks if param not found
+    return sectionMap[param] || 'all'; // Default to showing all if param not found
 }
 
 // Initialize the application
@@ -58,9 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Add infinite scroll listener
     window.addEventListener('scroll', () => {
-        if (document.querySelector('#cards-for-sale').classList.contains('active')) {
-            handleInfiniteScroll();
-        }
+        handleInfiniteScroll();
     });
 
     // Add checkout button listener
@@ -91,10 +90,14 @@ function toggleCart() {
 
 // Handle infinite scroll
 function handleInfiniteScroll() {
-    const endOfPage = window.innerHeight + window.pageYOffset >= document.documentElement.scrollHeight - 1000;
+    const cardsSection = document.getElementById('cards-for-sale');
     
-    if (endOfPage && !isLoading && hasMoreCards) {
-        loadMoreCards();
+    // Only load more cards if the cards section is visible
+    if (!cardsSection.classList.contains('hidden') && !isLoading && hasMoreCards) {
+        const endOfPage = window.innerHeight + window.pageYOffset >= document.documentElement.scrollHeight - 1000;
+        if (endOfPage) {
+            loadMoreCards();
+        }
     }
 }
 
@@ -413,17 +416,65 @@ document.addEventListener('mouseup', () => {
 
 // Section switching animation
 function showSection(sectionId) {
-    const sections = document.querySelectorAll('section');
-    sections.forEach(section => {
-        if (section.id === sectionId) {
+    const sections = document.querySelectorAll('.content-section');
+    const navButtons = document.querySelectorAll('.pokemon-nav .pokeball-button');
+
+    // Update active button style
+    navButtons.forEach(button => {
+        if (button.textContent.trim() === 'Todos' && sectionId === 'all') {
+            button.classList.add('active-nav');
+        } else if (button.getAttribute('onclick').includes(sectionId) && sectionId !== 'all') {
+            button.classList.add('active-nav');
+        } else {
+            button.classList.remove('active-nav');
+        }
+    });
+
+    // Show/hide appropriate sections
+    if (sectionId === 'all') {
+        // Show all sections
+        sections.forEach(section => {
             section.classList.remove('hidden');
             section.classList.add('active');
             section.style.animation = 'fadeIn 0.5s ease-in-out';
-        } else {
-            section.classList.add('hidden');
-            section.classList.remove('active');
-        }
-    });
+        });
+
+        // Update URL parameter
+        updateUrlParam('p', 'todos');
+    } else {
+        // Show only the selected section
+        sections.forEach(section => {
+            if (section.id === sectionId) {
+                section.classList.remove('hidden');
+                section.classList.add('active');
+                section.style.animation = 'fadeIn 0.5s ease-in-out';
+            } else {
+                section.classList.add('hidden');
+                section.classList.remove('active');
+            }
+        });
+
+        // Update URL parameter
+        const paramMap = {
+            'ready-made-decks': 'mazos',
+            'cards-for-sale': 'cartas',
+            'pokemon-lessons': 'clases'
+        };
+        updateUrlParam('p', paramMap[sectionId] || 'todos');
+    }
+
+    // Make sure infinite scroll works properly for cards section
+    if (sectionId === 'all' || sectionId === 'cards-for-sale') {
+        // Load more cards if needed
+        handleInfiniteScroll();
+    }
+}
+
+// Update URL parameter without refreshing the page
+function updateUrlParam(param, value) {
+    const url = new URL(window.location);
+    url.searchParams.set(param, value);
+    window.history.pushState({}, '', url);
 }
 
 // Add hover sound effect to buttons

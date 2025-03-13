@@ -33,6 +33,10 @@
             <img src="assets/items/poke-ball.png" alt="Pokeball" class="rotating-pokeball">
         </div>
         <nav class="pokemon-nav">
+            <button onclick="showSection('all')" class="pokeball-button active-nav">
+                <img src="assets/ui/pokeball.png" alt="All">
+                Todos
+            </button>
             <button onclick="showSection('ready-made-decks')" class="pokeball-button">
                 <img src="assets/ui/deck.png" alt="Deck">
                 Mazos Preparados
@@ -101,14 +105,14 @@
             </div>
         </div>
 
-        <section id="ready-made-decks" class="active">
+        <section id="ready-made-decks" class="content-section active">
             <h2>🏆 Mazos Preparados 🏆</h2>
             <div class="deck-container">
                 <!-- Decks will be dynamically loaded here -->
             </div>
         </section>
 
-        <section id="cards-for-sale" class="hidden">
+        <section id="cards-for-sale" class="content-section active">
             <h2>🎴 Cartas en Venta 🎴</h2>
             <div class="cards-grid">
                 <!-- Cards will be dynamically loaded here -->
@@ -118,7 +122,7 @@
             </div>
         </section>
 
-        <section id="pokemon-lessons" class="section-container">
+        <section id="pokemon-lessons" class="content-section active section-container">
             <h2>🎓 Aprende a Jugar Pokémon TCG 🎓</h2>
             
             <div class="lessons-container">
