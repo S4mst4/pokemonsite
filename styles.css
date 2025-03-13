@@ -455,8 +455,8 @@ main {
 }
 
 .contact-pokeball {
-    width: 25px;
-    height: 25px;
+    width: 40px;
+    height: 40px;
     animation: shake 1s infinite;
 }
 
