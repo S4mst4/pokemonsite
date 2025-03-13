@@ -1,0 +1,40 @@
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #f8f8f8;
+    background-image: url('https://assets.pokemon.com/static2/_ui/img/chrome/body_bg.png');
+    background-repeat: repeat;
+    font-family: 'Press Start 2P', cursive;
+    cursor: url('../assets/items/poke-ball.png') 15 15, auto;
+}
+
+h1 {
+    font-size: 2.5em;
+    text-shadow: 3px 3px 0 var(--pokemon-dark-blue),
+                 -1px -1px 0 var(--pokemon-dark-blue),  
+                 1px -1px 0 var(--pokemon-dark-blue),
+                 -1px 1px 0 var(--pokemon-dark-blue),
+                 1px 1px 0 var(--pokemon-dark-blue);
+    animation: titlePulse 2s infinite;
+}
+
+h2 {
+    text-align: center;
+    color: var(--pokemon-blue);
+    font-size: 1.8em;
+    margin: 30px 0;
+    text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.1);
+}
+
+.hidden {
+    display: none;
+}
+
+.active {
+    display: block;
+} 

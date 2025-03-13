@@ -1,0 +1,144 @@
+/* Modal and Calendar Styles */
+
+/* Modal Dialog */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 1000;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+.modal-content {
+    position: relative;
+    background: white;
+    margin: 5% auto;
+    padding: 30px;
+    width: 90%;
+    max-width: 600px;
+    border-radius: 20px;
+    border: 3px solid var(--pokemon-blue);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    animation: slideIn 0.3s ease-in-out;
+}
+
+.close-button {
+    position: absolute;
+    right: 20px;
+    top: 15px;
+    font-size: 30px;
+    cursor: pointer;
+    color: var(--pokemon-red);
+    transition: transform 0.3s ease;
+}
+
+.close-button:hover {
+    transform: scale(1.2);
+}
+
+/* Calendar Styling */
+.calendar-container {
+    margin-top: 20px;
+}
+
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.calendar-nav-btn {
+    background: linear-gradient(to bottom, var(--pokemon-yellow) 0%, #c7a008 100%);
+    border: 2px solid var(--pokemon-blue);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    font-size: 1.2em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.calendar-nav-btn:hover {
+    transform: scale(1.1);
+    background: linear-gradient(to bottom, #ffde00 0%, var(--pokemon-yellow) 100%);
+}
+
+.weekdays {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.weekdays div {
+    background: var(--pokemon-blue);
+    color: white;
+    padding: 8px;
+    font-size: 0.8em;
+    border-radius: 8px;
+}
+
+.calendar-days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+}
+
+.calendar-day {
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f5f5f5;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.9em;
+    position: relative;
+}
+
+.calendar-day:hover {
+    transform: scale(1.1);
+    z-index: 1;
+}
+
+.calendar-day.has-class {
+    background: linear-gradient(135deg, var(--pokemon-yellow) 0%, #ffde00 100%);
+    border: 2px solid var(--pokemon-blue);
+    color: #1a1a1a;
+    font-weight: bold;
+}
+
+.calendar-day.has-class:hover {
+    background: linear-gradient(135deg, #ffde00 0%, var(--pokemon-yellow) 100%);
+}
+
+.calendar-legend {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 2px dashed var(--pokemon-yellow);
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 10px 0;
+}
+
+.legend-color {
+    width: 20px;
+    height: 20px;
+    border-radius: 4px;
+}
+
+.legend-color.has-class {
+    background: linear-gradient(135deg, var(--pokemon-yellow) 0%, #ffde00 100%);
+    border: 2px solid var(--pokemon-blue);
+} 

@@ -1,0 +1,22 @@
+/* Main CSS file that imports all modules */
+
+/* Import Variables */
+@import 'variables.css';
+
+/* Import Reset and Base Styles */
+@import 'reset.css';
+
+/* Import Layout */
+@import 'layout.css';
+
+/* Import Components */
+@import 'components.css';
+
+/* Import Animations */
+@import 'animations.css';
+
+/* Import Cart Styles */
+@import 'cart.css';
+
+/* Import Modal Styles */
+@import 'modal.css'; 

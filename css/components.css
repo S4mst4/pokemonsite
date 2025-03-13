@@ -1,0 +1,332 @@
+/* UI Components */
+
+/* Navigation */
+.pokemon-nav {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.pokeball-button {
+    background: linear-gradient(to bottom, var(--pokemon-yellow) 0%, #c7a008 100%);
+    border: 3px solid var(--pokemon-blue);
+    border-radius: 30px;
+    color: #1a1a1a;
+    cursor: pointer;
+    font-size: 1em;
+    padding: 12px 28px;
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.pokeball-button.active-nav {
+    background: linear-gradient(to bottom, var(--pokemon-blue) 0%, var(--pokemon-dark-blue) 100%);
+    border: 3px solid var(--pokemon-yellow);
+    color: white;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.25);
+}
+
+.pokeball-button.active-nav img {
+    transform: rotate(180deg);
+}
+
+.pokeball-button img {
+    width: 25px;
+    height: 25px;
+    transition: transform 0.3s ease;
+}
+
+.pokeball-button:hover {
+    transform: translateY(-3px);
+    background: linear-gradient(to bottom, #ffde00 0%, var(--pokemon-yellow) 100%);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.25);
+}
+
+.pokeball-button:hover img {
+    transform: rotate(180deg);
+}
+
+/* Cards & Decks */
+.cards-left, .cards-right {
+    position: relative;
+    width: 100px;
+    height: 140px;
+}
+
+.banner-card {
+    position: absolute;
+    width: 100px;
+    height: 140px;
+    transition: transform 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+}
+
+.banner-pokemon {
+    width: 120px;
+    height: 120px;
+    transition: transform 0.3s ease;
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+}
+
+.deck-card {
+    background: linear-gradient(135deg, #fff 0%, #f0f0f0 100%);
+    border-radius: 15px;
+    border: 3px solid var(--pokemon-blue);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+    padding: 20px;
+    text-align: center;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.deck-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 5px;
+    background: linear-gradient(90deg, var(--pokemon-red), var(--pokemon-yellow), var(--pokemon-blue));
+}
+
+.deck-card:hover {
+    transform: translateY(-8px) rotate(2deg);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+}
+
+.deck-card img {
+    width: 200px;
+    height: auto;
+    margin-bottom: 15px;
+}
+
+.card {
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 16px;
+    padding: 15px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    position: relative;
+    padding-bottom: 60px;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.card img {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+
+.card h3 {
+    margin: 10px 0;
+    font-size: 1rem;
+    color: #333;
+}
+
+.card .type {
+    color: #666;
+    font-size: 0.9rem;
+    margin: 5px 0;
+}
+
+.price {
+    color: #ff5555;
+    font-size: 1.5em;
+    font-weight: bold;
+    margin: 10px 0;
+}
+
+.card .price {
+    font-size: 1.2rem;
+    color: #2a75bb;
+    font-weight: bold;
+    margin: 10px 0;
+}
+
+/* Lesson Components */
+.lesson-type {
+    background: linear-gradient(135deg, #fff 0%, #f5f5f5 100%);
+    border-radius: 15px;
+    padding: 25px;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.lesson-type:hover {
+    transform: translateY(-5px);
+}
+
+.lesson-type h3 {
+    color: var(--pokemon-blue);
+    margin-bottom: 20px;
+    font-size: 1.2em;
+}
+
+.schedule-container {
+    margin: 20px 0;
+}
+
+.overview-item {
+    background: linear-gradient(135deg, #fff 0%, #f8f8f8 100%);
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border: 2px solid var(--pokemon-blue);
+    transition: transform 0.3s ease;
+}
+
+.overview-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.overview-item h4 {
+    color: var(--pokemon-dark-blue);
+    margin-bottom: 15px;
+    font-size: 1em;
+}
+
+.overview-item p {
+    font-size: 0.8em;
+    line-height: 1.6;
+    color: #444;
+}
+
+/* Buttons */
+.buy-button, .add-to-deck {
+    background: linear-gradient(to bottom, #2a75bb 0%, #1a5aa6 100%);
+    border: none;
+    border-radius: 25px;
+    color: white;
+    cursor: pointer;
+    font-size: 1.1em;
+    padding: 12px 25px;
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+}
+
+.buy-button:hover, .add-to-deck:hover {
+    background: linear-gradient(to bottom, #3c5aa6 0%, #2a75bb 100%);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.schedule-button, .lesson-button {
+    display: inline-block;
+    background: linear-gradient(to bottom, var(--pokemon-yellow) 0%, #c7a008 100%);
+    color: #1a1a1a;
+    padding: 12px 25px;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: bold;
+    margin-top: 15px;
+    transition: all 0.3s ease;
+    border: 2px solid var(--pokemon-blue);
+}
+
+.schedule-button:hover, .lesson-button:hover {
+    background: linear-gradient(to bottom, #ffde00 0%, var(--pokemon-yellow) 100%);
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.add-to-cart, .add-to-cart-deck {
+    background: white;
+    border: none;
+    border-radius: 12px;
+    color: var(--pokemon-blue);
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.add-to-cart {
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+}
+
+.add-to-cart-deck {
+    margin: 15px auto 0;
+}
+
+.add-to-cart:hover, .add-to-cart-deck:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(42, 117, 187, 0.2);
+}
+
+.add-to-cart:active, .add-to-cart-deck:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 8px rgba(42, 117, 187, 0.2);
+}
+
+.add-to-cart svg, .add-to-cart-deck svg {
+    width: 20px;
+    height: 20px;
+}
+
+/* Contact Button */
+.floating-contact {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+}
+
+.contact-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: linear-gradient(135deg, var(--pokemon-red) 0%, #cc0000 100%);
+    border: 3px solid var(--pokemon-yellow);
+    border-radius: 50px;
+    color: white;
+    cursor: pointer;
+    font-size: 1em;
+    padding: 15px 30px;
+    font-weight: bold;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.contact-pokeball {
+    width: 40px;
+    height: 40px;
+}
+
+/* Loading Spinner */
+.loading-spinner {
+    text-align: center;
+    padding: 20px;
+}
+
+.loading-spinner.hidden {
+    display: none;
+}
+
+.loading-spinner img {
+    width: 40px;
+    height: 40px;
+} 

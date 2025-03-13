@@ -1,0 +1,112 @@
+/* Animations */
+
+/* Keyframes Definitions */
+@keyframes titlePulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+@keyframes rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+@keyframes bounce {
+    from { transform: scale(1.2) translateY(-10px); }
+    to { transform: scale(1.2) translateY(-15px); }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes shake {
+    0% { transform: rotate(-10deg); }
+    50% { transform: rotate(10deg); }
+    100% { transform: rotate(-10deg); }
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Animation Applications */
+.banner-pokemon:hover {
+    transform: scale(1.2) translateY(-10px);
+    animation: bounce 0.5s infinite alternate;
+}
+
+/* Left cards fan effect */
+.card-left-1 {
+    transform: rotate(-25deg) translateX(-20px);
+    z-index: 1;
+}
+
+.card-left-2 {
+    transform: rotate(-15deg) translateX(-10px);
+    z-index: 2;
+}
+
+.card-left-3 {
+    transform: rotate(-5deg);
+    z-index: 3;
+}
+
+/* Right cards fan effect */
+.card-right-1 {
+    transform: rotate(5deg);
+    z-index: 1;
+}
+
+.card-right-2 {
+    transform: rotate(15deg) translateX(10px);
+    z-index: 2;
+}
+
+.card-right-3 {
+    transform: rotate(25deg) translateX(20px);
+    z-index: 3;
+}
+
+.cards-left:hover .banner-card, .cards-right:hover .banner-card {
+    transform: rotate(0) translateX(0);
+}
+
+.contact-pokeball {
+    animation: shake 1s infinite;
+}
+
+.rotating-pokeball {
+    animation: rotate 3s infinite linear;
+}
+
+/* Pokeball cursor animation */
+.pokeball-cursor {
+    width: 20px;
+    height: 20px;
+    background: url('../assets/items/poke-ball.png') no-repeat;
+    background-size: contain;
+    position: fixed;
+    pointer-events: none;
+    z-index: 9999;
+    transition: all 0.1s ease;
+    display: none;
+} 
