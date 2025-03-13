@@ -31,19 +31,19 @@
             </div>
         </div>
         <nav class="pokemon-nav">
-            <button onclick="showSection('all')" class="pokeball-button active-nav">
+            <button onclick="UIModule.showSection('all')" class="pokeball-button active-nav">
                 <img src="assets/ui/pokeball.png" alt="All">
                 Todos
             </button>
-            <button onclick="showSection('ready-made-decks')" class="pokeball-button">
+            <button onclick="UIModule.showSection('ready-made-decks')" class="pokeball-button">
                 <img src="assets/ui/deck.png" alt="Deck">
                 Mazos Preparados
             </button>
-            <button onclick="showSection('cards-for-sale')" class="pokeball-button">
+            <button onclick="UIModule.showSection('cards-for-sale')" class="pokeball-button">
                 <img src="assets/ui/collection.png" alt="Collection">
                 Cartas en Venta
             </button>
-            <button onclick="showSection('pokemon-lessons')" class="pokeball-button">
+            <button onclick="UIModule.showSection('pokemon-lessons')" class="pokeball-button">
                 <img src="assets/ui/hand.png" alt="Hand">
                 Aprende a Jugar
             </button>
@@ -128,7 +128,7 @@
                     <h3>🌟 Lecciones Grupales Gratuitas</h3>
                     <div class="schedule-container">
                         <p>¡Únete a nuestras sesiones gratuitas de aprendizaje! Consulta nuestro horario actual:</p>
-                        <button onclick="openScheduleModal()" class="schedule-button">Ver Horario de Clases</button>
+                        <button onclick="CalendarModule.openScheduleModal()" class="schedule-button">Ver Horario de Clases</button>
                     </div>
                 </div>
 
@@ -185,20 +185,20 @@
         </div>
         <div class="map-container">
             <p class="map-subtitle">Encuéntranos en Uvita 🇨🇷 </p>
-            <img src="assets/maps/uvita_map.png" alt="Mapa de Uvita estilo Pokémon" class="uvita-map" onclick="openGoogleMaps()">
+            <img src="assets/maps/uvita_map.png" alt="Mapa de Uvita estilo Pokémon" class="uvita-map" onclick="UIModule.openGoogleMaps()">
         </div>
     </footer>
 
     <!-- Calendar Modal -->
     <div id="scheduleModal" class="modal">
         <div class="modal-content">
-            <span class="close-button" onclick="closeScheduleModal()">&times;</span>
+            <span class="close-button" onclick="CalendarModule.closeScheduleModal()">&times;</span>
             <h3>📅 Horario de Clases Grupales</h3>
             <div class="calendar-container">
                 <div class="calendar-header">
-                    <button onclick="previousMonth()" class="calendar-nav-btn">&lt;</button>
+                    <button onclick="CalendarModule.previousMonth()" class="calendar-nav-btn">&lt;</button>
                     <h4 id="currentMonth">Mes Año</h4>
-                    <button onclick="nextMonth()" class="calendar-nav-btn">&gt;</button>
+                    <button onclick="CalendarModule.nextMonth()" class="calendar-nav-btn">&gt;</button>
                 </div>
                 <div class="weekdays">
                     <div>Dom</div>
@@ -222,6 +222,10 @@
         </div>
     </div>
 
-    <script src="script.js"></script>
+    <script src="js/data.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/calendar.js"></script>
+    <script src="js/main.js"></script>
 </body>
 </html> 
